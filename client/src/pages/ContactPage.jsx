@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { FiInstagram, FiMail, FiPhone } from "react-icons/fi";
+import { FiInstagram, FiMail } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 
 function ContactPage() {
@@ -84,15 +84,20 @@ function ContactPage() {
           </div>
           <div className="panel soft-card space-y-3 p-4 sm:p-5">
             <h3 className="font-display text-xl font-bold sm:text-2xl">Social and Contact</h3>
-            <p className="flex items-center gap-2 text-sm">
-              <FiInstagram /> Instagram: add your real profile URL
-            </p>
-            <p className="flex items-center gap-2 text-sm">
-              <FiMail /> Email: add your real contact email
-            </p>
-            <p className="flex items-center gap-2 text-sm">
-              <FiPhone /> Phone: add your real number
-            </p>
+            <a
+              href="https://www.instagram.com/venilanaik.23?igsh=M3ZidDZsaXAxdXYw"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-zinc-700 underline-offset-4 transition hover:underline dark:text-zinc-200"
+            >
+              <FiInstagram /> @venilanaik.23
+            </a>
+            <a
+              href="mailto:venilanaik2005@gmail.com"
+              className="inline-flex items-center gap-2 text-sm text-zinc-700 underline-offset-4 transition hover:underline dark:text-zinc-200"
+            >
+              <FiMail /> venilanaik2005@gmail.com
+            </a>
           </div>
         </Reveal>
       </div>

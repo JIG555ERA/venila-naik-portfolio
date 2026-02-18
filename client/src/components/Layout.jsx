@@ -152,6 +152,12 @@ function Layout({ children }) {
             <p className="text-zinc-600 dark:text-zinc-400">
               Social media storytelling with a clean visual voice.
             </p>
+            <a
+              href="mailto:venilanaik2005@gmail.com"
+              className="mt-1 inline-block text-zinc-600 underline-offset-4 transition hover:underline dark:text-zinc-400"
+            >
+              venilanaik2005@gmail.com
+            </a>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
             <a
