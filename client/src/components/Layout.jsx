@@ -1,11 +1,47 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Lenis from "lenis";
-import { FiInstagram, FiMoon, FiSun, FiYoutube } from "react-icons/fi";
+import { FiInstagram, FiMoon, FiShare2, FiSun, FiYoutube } from "react-icons/fi";
 
 function Layout({ children }) {
   const location = useLocation();
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+  const portfolioUrl = "https://venila-naik-portfolio.vercel.app/";
+  const shareTitle = "Venila Naik's Portfolio";
+  const shareText =
+    "Explore Venila Naik's portfolio for social media storytelling, visual communication, and creative work.";
+
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: portfolioUrl,
+        });
+        return;
+      }
+    } catch {
+      return;
+    }
+
+    const fallbackText = `${shareTitle} ${portfolioUrl}`;
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(fallbackText);
+        return;
+      } catch {
+        // ignore clipboard fallback errors
+      }
+    }
+
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(fallbackText)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+
   const handleGlowMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -97,6 +133,14 @@ function Layout({ children }) {
             </NavLink>
             <button
               type="button"
+              onClick={handleShare}
+              className="inline-flex items-center gap-1 rounded-full border border-zinc-300/70 px-2.5 py-1.5 text-[11px] transition duration-200 hover:-translate-y-0.5 hover:bg-zinc-100/70 sm:px-3 sm:text-xs dark:border-zinc-700/80 dark:hover:bg-zinc-800/70"
+              aria-label="Share portfolio"
+            >
+              <FiShare2 /> Share
+            </button>
+            <button
+              type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300/70 transition duration-300 hover:-translate-y-1 hover:bg-zinc-100/80 sm:ml-1 sm:h-9 sm:w-9 dark:border-zinc-700/80 dark:hover:bg-zinc-800/80"
               aria-label="Toggle theme"
@@ -136,6 +180,14 @@ function Layout({ children }) {
             >
               <FiYoutube />
             </a>
+            <button
+              type="button"
+              onClick={handleShare}
+              aria-label="Share portfolio on WhatsApp"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-300/70 transition duration-300 hover:-translate-y-1 hover:bg-zinc-100/80 dark:border-zinc-700/80 dark:hover:bg-zinc-800/80"
+            >
+              <FiShare2 />
+            </button>
             <p className="text-zinc-600 dark:text-zinc-400">
               (c) {new Date().getFullYear()} All rights reserved.
             </p>

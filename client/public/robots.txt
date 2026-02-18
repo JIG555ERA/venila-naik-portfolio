@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://venila-naik-portfolio.vercel.app/sitemap.xml
