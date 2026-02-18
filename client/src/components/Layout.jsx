@@ -133,14 +133,6 @@ function Layout({ children }) {
             </NavLink>
             <button
               type="button"
-              onClick={handleShare}
-              className="inline-flex items-center gap-1 rounded-full border border-zinc-300/70 px-2.5 py-1.5 text-[11px] transition duration-200 hover:-translate-y-0.5 hover:bg-zinc-100/70 sm:px-3 sm:text-xs dark:border-zinc-700/80 dark:hover:bg-zinc-800/70"
-              aria-label="Share portfolio"
-            >
-              <FiShare2 /> Share
-            </button>
-            <button
-              type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300/70 transition duration-300 hover:-translate-y-1 hover:bg-zinc-100/80 sm:ml-1 sm:h-9 sm:w-9 dark:border-zinc-700/80 dark:hover:bg-zinc-800/80"
               aria-label="Toggle theme"
