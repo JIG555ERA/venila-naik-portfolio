@@ -1,29 +1,39 @@
-import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import { FiInstagram, FiMail } from "react-icons/fi";
 import Reveal from "../components/Reveal.jsx";
 
 function ContactPage() {
-  const formRef = useRef(null);
   const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setStatus("Add EmailJS env vars to enable sending.");
-      return;
-    }
+    setStatus("");
+    setIsSending(true);
+    const formData = new FormData(event.currentTarget);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
 
     try {
-      await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey });
-      formRef.current.reset();
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed");
+      }
+
+      event.currentTarget.reset();
       setStatus("Message sent successfully.");
     } catch {
       setStatus("Message failed to send. Please try again.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -42,7 +52,7 @@ function ContactPage() {
       <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
         <Reveal className="panel soft-card p-4 sm:p-7">
           <h2 className="font-display text-2xl font-bold sm:text-3xl">Send a Message</h2>
-          <form ref={formRef} onSubmit={handleSubmit} className="mt-5 grid gap-3">
+          <form onSubmit={handleSubmit} className="mt-5 grid gap-3">
             <label className="text-sm font-semibold">Name</label>
             <input
               name="name"
@@ -67,8 +77,12 @@ function ContactPage() {
               placeholder="Write your message..."
               className="glass-input"
             />
-            <button type="submit" className="btn-main mt-2 w-max text-xs sm:text-sm">
-              Send Message
+            <button
+              type="submit"
+              className="btn-main mt-2 w-full justify-center text-xs sm:w-max sm:text-sm"
+              disabled={isSending}
+            >
+              {isSending ? "Sending..." : "Send Message"}
             </button>
             {status ? <p className="text-sm text-zinc-600 dark:text-zinc-300">{status}</p> : null}
           </form>

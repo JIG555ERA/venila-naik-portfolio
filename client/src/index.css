@@ -348,6 +348,7 @@
     transform: rotateX(-90deg) translateZ(calc(var(--book-h) / 2 - var(--book-d) / 2));
     background: linear-gradient(90deg, #1e293b, #0b1220);
   }
+
 }
 
 @media (pointer: fine) {

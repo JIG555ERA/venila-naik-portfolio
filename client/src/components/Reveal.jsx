@@ -9,18 +9,25 @@ function Reveal({ children, className = "", delay = 0 }) {
   const ref = useRef(null);
 
   useGSAP(() => {
+    if (!ref.current) return;
+
+    const childrenToAnimate = Array.from(ref.current.children).filter((node) => node.nodeType === 1);
+    const targets = childrenToAnimate.length > 1 ? childrenToAnimate : ref.current;
+
     gsap.fromTo(
-      ref.current,
-      { opacity: 0, y: 42 },
+      targets,
+      { opacity: 0, y: 36 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.9,
+        duration: 0.8,
         delay,
         ease: "power3.out",
+        stagger: childrenToAnimate.length > 1 ? 0.11 : 0,
         scrollTrigger: {
           trigger: ref.current,
-          start: "top 82%",
+          start: "top 84%",
+          once: true,
         },
       },
     );

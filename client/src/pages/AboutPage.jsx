@@ -4,7 +4,6 @@ import Reveal from "../components/Reveal.jsx";
 import TiltCard from "../components/TiltCard.jsx";
 import venila_naik from "../assets/ven_dp.png";
 import venila_naik01 from "../assets/venila_naik01.jpeg";
-import venila_naik02 from "../assets/venila_naik02.jpeg";
 import venila_naik03 from "../assets/venila_naik03.jpeg";
 
 const timeline = [
@@ -26,7 +25,7 @@ const timeline = [
 ];
 
 function AboutPage() {
-  const images = [venila_naik, venila_naik01, venila_naik02, venila_naik03];
+  const images = [venila_naik, venila_naik01, venila_naik03];
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFastRewinding, setIsFastRewinding] = useState(false);
   const timeoutIdsRef = useRef([]);

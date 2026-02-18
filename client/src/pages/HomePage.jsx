@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { FiArrowUpRight, FiStar } from "react-icons/fi";
+import { TypeAnimation } from "react-type-animation";
 import Reveal from "../components/Reveal.jsx";
 import TiltCard from "../components/TiltCard.jsx";
 import { projects, skills, stats, sampleWorks } from "../data/portfolioData.js";
@@ -15,6 +16,8 @@ function HomePage() {
     event.currentTarget.style.setProperty("--glow-x", `${x}%`);
     event.currentTarget.style.setProperty("--glow-y", `${y}%`);
   };
+
+  const roles = ["Social media manager", "Content writer", "Editor", "Brand designer"]
 
   useGSAP(() => {
     gsap.fromTo(
@@ -33,12 +36,24 @@ function HomePage() {
         <div className="space-y-4 sm:space-y-5">
           <p className="hero-load tag w-max">portfolio</p>
           <div className="hero-load">
-            <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">Hello</p>
-            <h1 className="font-display text-3xl font-extrabold leading-tight sm:text-6xl">
-              I&apos;m Venila Naik
-            </h1>
-            <p className="mt-2 text-sm font-semibold text-zinc-600 sm:text-base dark:text-zinc-300">
-              Social Media Manager and Mass Communication Student
+            <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">Hello!</p>
+            <h1 className="font-display text-3xl font-extrabold leading-tight sm:text-6xl">I&apos;m Venila Naik</h1>
+            <p className="mt-2 text-lg sm:text-2xl font-semibold text-zinc-600 dark:text-zinc-300">
+              I&apos;m{" "}
+              <TypeAnimation
+                sequence={[
+                  "a Social Media Manager",
+                  1200,
+                  "a Mass Communication Student",
+                  1200,
+                  "a Content Creator",
+                  1200,
+                  "a Visual Storyteller",
+                  1200,
+                ]}
+                speed={50}
+                repeat={Infinity}
+              />
             </p>
           </div>
           <p className="hero-load max-w-xl text-zinc-700 dark:text-zinc-300">
@@ -55,11 +70,17 @@ function HomePage() {
               <FiStar /> Creative storytelling and communication
             </li>
           </ul>
-          <div className="hero-load flex flex-wrap gap-2.5 sm:gap-3">
-            <Link to="/projects" className="btn-main text-xs sm:text-sm">
+          <div className="hero-load hidden gap-2.5 sm:gap-3 lg:flex lg:items-center lg:group/cta">
+            <Link
+              to="/projects"
+              className="btn-main cta-primary text-md sm:text-md lg:group-hover/cta:!border lg:group-hover/cta:!border-zinc-300 lg:group-hover/cta:!bg-transparent lg:group-hover/cta:!text-zinc-900 lg:group-hover/cta:!shadow-none lg:dark:group-hover/cta:!border-zinc-700 lg:dark:group-hover/cta:!text-zinc-100"
+            >
               View My Work <FiArrowUpRight />
             </Link>
-            <Link to="/contact" className="btn-ghost text-xs sm:text-sm">
+            <Link
+              to="/contact"
+              className="btn-ghost cta-secondary text-md sm:text-lg lg:group-hover/cta:!border-zinc-950 lg:group-hover/cta:!bg-zinc-950 lg:group-hover/cta:!text-white lg:group-hover/cta:shadow-[0_10px_20px_rgba(0,0,0,0.2)] lg:dark:group-hover/cta:!border-zinc-100 lg:dark:group-hover/cta:!bg-zinc-100 lg:dark:group-hover/cta:!text-zinc-900"
+            >
               Contact Me
             </Link>
           </div>
@@ -73,6 +94,14 @@ function HomePage() {
           <div className="absolute right-3 bottom-3 rounded-full bg-black/90 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm sm:right-4 sm:bottom-4 sm:px-4 sm:py-2 sm:text-sm dark:bg-white dark:text-black">
             Venila
           </div>
+        </div>
+        <div className="hero-load grid grid-cols-2 gap-2.5 sm:gap-3 lg:hidden">
+          <Link to="/projects" className="btn-main w-full justify-center text-xs sm:text-sm">
+            View My Work <FiArrowUpRight />
+          </Link>
+          <Link to="/contact" className="btn-ghost w-full justify-center text-xs sm:text-sm">
+            Contact Me
+          </Link>
         </div>
       </section>
 
@@ -153,11 +182,10 @@ function HomePage() {
                 className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
               />
               <div className="space-y-2 p-4">
-                <p className="tag w-max">Featured</p>
+                <p className="tag w-max">{work.category}</p>
                 <h3 className="font-display text-xl font-bold sm:text-2xl">{work.title}</h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-300">
-                  Placeholder sample image. Replace with your actual project visuals.
-                </p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-300">{work.brief}</p>
+                <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{work.result}</p>
               </div>
             </TiltCard>
           ))}

@@ -1,4 +1,5 @@
 import { FiArrowUpRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import Reveal from "../components/Reveal.jsx";
 import TiltCard from "../components/TiltCard.jsx";
 import { projects } from "../data/portfolioData.js";
@@ -21,11 +22,11 @@ function ProjectsPage() {
         {projects.map((project) => (
           <Reveal key={project.id}>
             <TiltCard className="panel soft-card lift-hover grid gap-4 overflow-hidden lg:grid-cols-[1.1fr_1fr]">
-              <div className="group relative overflow-hidden">
+              <div className="group relative h-full overflow-hidden">
                 <img
                   src={project.image}
                   alt={`${project.title} placeholder`}
-                  className="h-full min-h-56 w-full object-cover transition duration-500 group-hover:scale-105 sm:min-h-72"
+                  className="h-72 w-full object-cover transition duration-500 group-hover:scale-105 lg:h-full lg:min-h-full"
                 />
                 <div className="absolute top-4 left-4 tag border-white bg-black/60 text-white">
                   Sample image
@@ -47,9 +48,9 @@ function ProjectsPage() {
                   <p className="mb-1 text-xs font-bold tracking-wide uppercase">Tools Used</p>
                   <p className="text-sm text-zinc-700 dark:text-zinc-300">{project.tools.join(" | ")}</p>
                 </div>
-                <button type="button" className="btn-main text-xs sm:text-sm">
+                <Link to={`/projects/${project.id}`} className="btn-main w-full justify-center text-xs sm:w-max sm:text-sm">
                   View Detail <FiArrowUpRight />
-                </button>
+                </Link>
               </div>
             </TiltCard>
           </Reveal>
