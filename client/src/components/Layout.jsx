@@ -170,7 +170,7 @@ function Layout({ children }) {
               <FiInstagram />
             </a>
             <a
-              href="https://youtu.be/lYvTn_EmCa8?si=a2zjyv_H7mUZQazv"
+              href="https://www.youtube.com/@VeNiLaNaIk"
               target="_blank"
               rel="noreferrer"
               aria-label="YouTube"

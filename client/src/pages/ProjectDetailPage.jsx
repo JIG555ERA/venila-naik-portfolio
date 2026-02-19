@@ -47,12 +47,24 @@ function ProjectDetailPage() {
             </div>
           </div>
 
-          <div className="panel soft-card overflow-hidden">
-            <img
-              src={project.image}
-              alt={`${project.title} hero`}
-              className="h-72 w-full object-cover sm:h-80"
-            />
+          <div className="panel soft-card overflow-hidden justify-center items-center flex">
+            {project.videoEmbedUrl ? (
+              <iframe
+                src={project.videoEmbedUrl}
+                title={`${project.title} video`}
+                className="w-full sm:h-100"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <img
+                src={project.image}
+                alt={`${project.title} hero`}
+                className="h-72 w-full object-cover sm:h-80"
+              />
+            )}
           </div>
         </div>
       </Reveal>
@@ -92,15 +104,28 @@ function ProjectDetailPage() {
       <Reveal className="panel soft-card p-5 sm:p-7">
         <p className="tag w-max">Visual Gallery</p>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-          {project.gallery.map((image, index) => (
-            <div key={image} className="group panel soft-card overflow-hidden">
-              <img
-                src={image}
-                alt={`${project.title} visual ${index + 1}`}
-                className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
-              />
-            </div>
-          ))}
+          {project.gallery.map((media, index) => {
+            const isVideo = typeof media === "string" && /\.(mp4|webm|ogg)(\?.*)?$/i.test(media);
+
+            return (
+              <div key={`${media}-${index}`} className="group panel soft-card overflow-hidden">
+                {isVideo ? (
+                  <video
+                    src={media}
+                    className="h-72 w-full object-cover"
+                    controls
+                    preload="metadata"
+                  />
+                ) : (
+                  <img
+                    src={media}
+                    alt={`${project.title} visual ${index + 1}`}
+                    className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
       </Reveal>
 

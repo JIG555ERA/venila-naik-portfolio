@@ -1,3 +1,8 @@
+
+import miniPizzaPoster from "../assets/mini_pizza.jpg";
+import shortFilmPoster from "../assets/short_film_poster.png";
+import miniPizzaReel from "../assets/videos/mini_pizza_reel.mp4";
+
 export const skills = [
   "Social Media Management",
   "Content Creation",
@@ -11,10 +16,10 @@ export const skills = [
 ];
 
 export const stats = [
-  { label: "Projects Completed", value: "12+" },
-  { label: "Content Campaigns", value: "30+" },
+  { label: "Projects Completed", value: "3+" },
+  { label: "Content Campaigns", value: "10+" },
   { label: "Student Film Work", value: "02" },
-  { label: "Instagram Concepts", value: "75+" },
+  { label: "Instagram Concepts", value: "15+" },
 ];
 
 export const projects = [
@@ -31,11 +36,10 @@ export const projects = [
       "Page handling and posting consistency",
     ],
     tools: ["Instagram", "Canva", "Mobile Reel Editing"],
-    image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80",
+    image: miniPizzaPoster,
     gallery: [
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1400&q=80",
+      miniPizzaPoster,
+      miniPizzaReel,
     ],
     client: "College Entrepreneurship Practice",
     duration: "6 Weeks",
@@ -67,11 +71,11 @@ export const projects = [
       "Visual narrative focus",
     ],
     tools: ["Creative Direction", "Storyboarding", "Basic Film Editing"],
-    image:
-      "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80",
+    image: shortFilmPoster,
+    videoEmbedUrl: "https://www.youtube.com/embed/lYvTn_EmCa8",
     gallery: [
+      shortFilmPoster,
       "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1400&q=80",
     ],
     client: "Academic Film Assignment",
     duration: "4 Weeks",
